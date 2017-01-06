@@ -47,16 +47,42 @@ $(document).ready(function() {
                     if (modcounter === 0) {
                         modcounter = 52;
                     }
-                    
+
                     cardArray.push(new cards(this.values[j], this.suits[i], this.face[j] + " of " + this.suits[i], "<img class='snap' alt='cardimage' src='assets/images/card" + modcounter + ".png'>"));
-                    
+
                 }
             }
         }
         deckShuffle();
-        for (var w = 0; w < x * 52; w++) {
-        $("#card").append(cardArray[w].image);
-    }
+        displayCards(x);
+        $("#deal").on("click", function dealing () {
+
+        	
+        	var res = getRandom(cardArray.length)
+        	console.log(res);
+        	$("#dealerHand").append(cardArray[45].image);
+        	$("#dealerHand").append("<img class='snap' alt='cardimage' src='assets/images/backface.png'>");
+        	$("#playerHand").append(cardArray[23].image);
+        	$("#playerHand").append(cardArray[26].image);
+
+        });
+        $("#reload").on("click", function () {
+        	location.reload();
+        	
+
+        });
+
+        $("#hitplayer").on("click", function hitPlayer () {
+        	
+        	
+
+        });
+
+        $("#hitdealer").on("click", function hitDealer () {
+        	
+        	
+
+        });
         console.log(cardArray[0].value);
     }
 
@@ -91,20 +117,18 @@ $(document).ready(function() {
             }
     }
     // shuffle();
-    
+function getRandom(x){
+	var e = Math.floor(Math.random() * x)
+	console.log(x);
+	console.log(e);
+	return e;
 
-    // function displayCards() {
-    //     for (var i = 1; i < 53; i++) {
-    //         // var modi = i % 52;
-    //         // if (modi === 0) {
-    //         //     modi = 52;
-    //         // }
+}
 
-    //         // $("#card").append("<img class='snap' alt='cardimage' src='assets/images/card" + modi + ".png'>");
+    function displayCards(x) {
+        for (var w = 0; w < x * 52; w++) {
+            $("#card").append(cardArray[w].image);
+        }
+    }
 
-    //         $("#card").append(cardArray[0].image);
-    //     }
-    //     console.log(cardArray[0].image);
-    // }
-    // displayCards();
 });
