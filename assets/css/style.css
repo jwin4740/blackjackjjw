@@ -21,4 +21,11 @@
 	width: 600px;
 	height: 200px;
 	margin-bottom: 10px;
+
+}
+
+.sums{
+	position: relative;
+	float: right;
+	margin-right: 15px;
 }

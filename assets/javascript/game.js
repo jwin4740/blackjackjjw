@@ -34,6 +34,8 @@ $(document).ready(function() {
     // fill array with x deck(s) of cards
     function buildDecks(x) {
         var counter = 0;
+        var dealerSum = "";
+        var playerSum = "";
         this.values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
         this.face = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"];
         this.suits = ["clubs", "diamonds", "hearts", "spades"];
@@ -54,12 +56,14 @@ $(document).ready(function() {
             }
         }
         deckShuffle();
-        displayCards(x);
+        // displayCards(x);
         $("#deal").on("click", function dealing() {
 
-
+            
             var res = getRandom(cardArray.length);
             console.log(cardArray[res]);
+            dealerSum = cardArray[res].value;
+            console.log("dealer total is: " + dealerSum);
             $("#dealerHand").append(cardArray[res].image);
             cardArray.splice(cardArray[res], 1);
             console.log("deck now has: " + cardArray.length);
@@ -67,23 +71,28 @@ $(document).ready(function() {
             // dealer blank
             var res1 = getRandom(cardArray.length);
             console.log(cardArray[res1]);
+            dealerSum += cardArray[res1].value;
+            console.log("dealer total is: " + dealerSum);
             console.log("DEALER HAS: " + cardArray[res1].name);
-            $("#dealerHand").append(cardArray[res1]);
+            $("#dealerHand").append("<img class='snap' alt='cardimage' src='assets/images/backface.png'>");
             cardArray.splice(cardArray[res1], 1);
             console.log("dealer has: " + cardArray.length);
-
+            $("#dealerSum").append(dealerSum);
 
             var res2 = getRandom(cardArray.length);
             console.log(cardArray[res2]);
+            playerSum = cardArray[res2].value;
             $("#playerHand").append(cardArray[res2].image);
             cardArray.splice(cardArray[res2], 1);
             console.log("deck now has: " + cardArray.length);
 
             var res3 = getRandom(cardArray.length);
             console.log(cardArray[res3]);
+            playerSum += cardArray[res3].value;
             $("#playerHand").append(cardArray[res3].image);
             cardArray.splice(cardArray[res3], 1);
             console.log("deck now has: " + cardArray.length);
+            $("#playerSum").append(playerSum);
 
 
 
@@ -98,9 +107,11 @@ $(document).ready(function() {
 
             var res3 = getRandom(cardArray.length);
             console.log(cardArray[res3]);
+            playerSum += cardArray[res3].value;
             $("#playerHand").append(cardArray[res3].image);
             cardArray.splice(cardArray[res3], 1);
             console.log("deck now has: " + cardArray.length);
+            $("#playerSum").html(playerSum);
 
 
         });
@@ -108,9 +119,11 @@ $(document).ready(function() {
         $("#hitdealer").on("click", function hitDealer() {
             var res3 = getRandom(cardArray.length);
             console.log(cardArray[res3]);
+            dealerSum += cardArray[res3].value;
             $("#dealerHand").append(cardArray[res3].image);
             cardArray.splice(cardArray[res3], 1);
             console.log("deck now has: " + cardArray.length);
+            $("#dealerSum").html(dealerSum);
 
 
 
