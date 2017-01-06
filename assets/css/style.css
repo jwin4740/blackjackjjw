@@ -1,7 +1,11 @@
 *{
 	box-sizing: border-box;
 }
-
+body{
+	background-image: url("../images/greenfelt.png");
+	background: cover;
+	color: white;
+}
 .but{
 	margin-bottom: 25px;
 	width: 75px;
