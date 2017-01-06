@@ -55,32 +55,64 @@ $(document).ready(function() {
         }
         deckShuffle();
         displayCards(x);
-        $("#deal").on("click", function dealing () {
+        $("#deal").on("click", function dealing() {
 
-        	
-        	var res = getRandom(cardArray.length)
-        	console.log(res);
-        	$("#dealerHand").append(cardArray[45].image);
-        	$("#dealerHand").append("<img class='snap' alt='cardimage' src='assets/images/backface.png'>");
-        	$("#playerHand").append(cardArray[23].image);
-        	$("#playerHand").append(cardArray[26].image);
+
+            var res = getRandom(cardArray.length);
+            console.log(cardArray[res]);
+            $("#dealerHand").append(cardArray[res].image);
+            cardArray.splice(cardArray[res], 1);
+            console.log("deck now has: " + cardArray.length);
+
+            // dealer blank
+            var res1 = getRandom(cardArray.length);
+            console.log(cardArray[res1]);
+            console.log("DEALER HAS: " + cardArray[res1].name);
+            $("#dealerHand").append(cardArray[res1]);
+            cardArray.splice(cardArray[res1], 1);
+            console.log("dealer has: " + cardArray.length);
+
+
+            var res2 = getRandom(cardArray.length);
+            console.log(cardArray[res2]);
+            $("#playerHand").append(cardArray[res2].image);
+            cardArray.splice(cardArray[res2], 1);
+            console.log("deck now has: " + cardArray.length);
+
+            var res3 = getRandom(cardArray.length);
+            console.log(cardArray[res3]);
+            $("#playerHand").append(cardArray[res3].image);
+            cardArray.splice(cardArray[res3], 1);
+            console.log("deck now has: " + cardArray.length);
+
+
 
         });
-        $("#reload").on("click", function () {
-        	location.reload();
-        	
+        $("#reload").on("click", function() {
+            location.reload();
+
 
         });
 
-        $("#hitplayer").on("click", function hitPlayer () {
-        	
-        	
+        $("#hitplayer").on("click", function hitPlayer() {
+
+            var res3 = getRandom(cardArray.length);
+            console.log(cardArray[res3]);
+            $("#playerHand").append(cardArray[res3].image);
+            cardArray.splice(cardArray[res3], 1);
+            console.log("deck now has: " + cardArray.length);
+
 
         });
 
-        $("#hitdealer").on("click", function hitDealer () {
-        	
-        	
+        $("#hitdealer").on("click", function hitDealer() {
+            var res3 = getRandom(cardArray.length);
+            console.log(cardArray[res3]);
+            $("#dealerHand").append(cardArray[res3].image);
+            cardArray.splice(cardArray[res3], 1);
+            console.log("deck now has: " + cardArray.length);
+
+
 
         });
         console.log(cardArray[0].value);
@@ -117,13 +149,14 @@ $(document).ready(function() {
             }
     }
     // shuffle();
-function getRandom(x){
-	var e = Math.floor(Math.random() * x)
-	console.log(x);
-	console.log(e);
-	return e;
+    function getRandom(x) {
+        var e = Math.floor(Math.random() * x)
+        console.log(x);
+        console.log(e);
 
-}
+        return e;
+
+    }
 
     function displayCards(x) {
         for (var w = 0; w < x * 52; w++) {
