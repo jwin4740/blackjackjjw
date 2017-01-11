@@ -2,6 +2,8 @@ $(document).ready(function() {
     // global variables
 
     var cardArray = [];
+    var chipCount = 500;
+    var currentBet = 0;
 
     // global variables
 
@@ -36,6 +38,8 @@ $(document).ready(function() {
         var counter = 0;
         var dealerSum = "";
         var playerSum = "";
+        $("#chipCount").html(chipCount);
+        $("#currentBet").html(currentBet);
         this.values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
         this.face = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"];
         this.suits = ["clubs", "diamonds", "hearts", "spades"];
@@ -58,8 +62,11 @@ $(document).ready(function() {
         deckShuffle();
         // displayCards(x);
         $("#deal").on("click", function dealing() {
+            currentBet = parseFloat(prompt("What is your bet?"));
+            $("#currentBet").html(currentBet);
 
-            
+
+
             var res = getRandom(cardArray.length);
             console.log(cardArray[res]);
             dealerSum = cardArray[res].value;
@@ -98,7 +105,11 @@ $(document).ready(function() {
 
         });
         $("#reload").on("click", function() {
-            location.reload();
+            $("#playerHand").html("");
+            $("#playerSum").html("");
+            $("#dealerHand").html("");
+            $("#dealerSum").html("");
+
 
 
         });
@@ -117,19 +128,50 @@ $(document).ready(function() {
         });
 
         $("#hitdealer").on("click", function hitDealer() {
-            var res3 = getRandom(cardArray.length);
-            console.log(cardArray[res3]);
-            dealerSum += cardArray[res3].value;
-            $("#dealerHand").append(cardArray[res3].image);
-            cardArray.splice(cardArray[res3], 1);
-            console.log("deck now has: " + cardArray.length);
-            $("#dealerSum").html(dealerSum);
+            do {
+                if (dealerSum < 17) {
+                    var res3 = getRandom(cardArray.length);
+                    console.log(cardArray[res3]);
+                    dealerSum += cardArray[res3].value;
+                    $("#dealerHand").append(cardArray[res3].image);
+                    cardArray.splice(cardArray[res3], 1);
+                    console.log("deck now has: " + cardArray.length);
+                    $("#dealerSum").html(dealerSum);
+                }
+            }
+            while (dealerSum < 17);
 
 
 
         });
         console.log(cardArray[0].value);
+
+        $("#finish").on("click", function outcome() {
+
+            if (playerSum > dealerSum && playerSum < 22) {
+
+
+                alert("You win");
+                chipCount += currentBet;
+                $("#chipCount").html(chipCount);
+                $("#currentBet").html(0);
+
+            }
+
+            if (playerSum === dealerSum) {
+                alert("push");
+                $("#currentBet").html(0);
+            }
+            if (playerSum < dealerSum) {
+                alert("you lose");
+                chipCount -= currentBet;
+                $("#chipCount").html(chipCount);
+                $("#currentBet").html(0);
+            }
+        })
+
     }
+
 
 
     buildDecks(3);

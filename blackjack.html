@@ -17,15 +17,38 @@
     <button class="but" id="reload">RELOAD</button>
     <button class="but" id="hitplayer">Hitplayer</button>
     <button class="but" id="hitdealer">Hitdealer</button>
-    <div class="handbox" id="dealerHand">
-        <h3>Dealer Hand</h3>
-        <h2 class="sums" id="dealerSum">
-        </h2>
+    <button class="but" id="finish">Finish</button>
+    <div class="handboxcontainer">
+        <div class="contain">
+            <div class="handbox">
+                <h2 class="title">Dealer Hand</h2>
+                <h2 class="sums" id="dealerSum"></h2>
+                <div id="dealerHand">
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="handbox" id="playerHand">
-        <h3>Player Hand</h3>
-        <h2 class="sums" id="playerSum">
-        </h2>
+    <div class="handboxcontainer">
+        <div class="contain">
+            <div class="handbox">
+                <h2 class="title">Player Hand</h2>
+                <h2 class="sums" id="playerSum"></h2>
+                <div id="playerHand">
+                </div>
+            </div>
+            <div class="wealth">
+                <div class="wealthcontainers">
+                    <div class="chipsum">
+                        <h3 class="title"> CHIP COUNT: &nbsp; &nbsp; $&nbsp;<span id="chipCount"> </span></h3>
+                    </div>
+                </div>
+                <div class="wealthcontainers">
+                    <div class="bet">
+                        <h3 class="title"> CURRENT BET: &nbsp; &nbsp;$&nbsp;<span id="currentBet"> </span> </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="card">
     </div>
