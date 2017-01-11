@@ -104,17 +104,8 @@ $(document).ready(function() {
 
 
         });
-        $("#reload").on("click", function() {
-            $("#playerHand").html("");
-            $("#playerSum").html("");
-            $("#dealerHand").html("");
-            $("#dealerSum").html("");
 
-
-
-        });
-
-        $("#hitplayer").on("click", function hitPlayer() {
+function hitPlayer() {
 
             var res3 = getRandom(cardArray.length);
             console.log(cardArray[res3]);
@@ -124,7 +115,28 @@ $(document).ready(function() {
             console.log("deck now has: " + cardArray.length);
             $("#playerSum").html(playerSum);
 
+        
+            
+        }
 
+
+       
+        
+        $("#hitplayer").on("click", hitPlayer); 
+
+
+        
+
+
+
+
+
+        $("#double").on("click", function doubleDown() {
+            var double = confirm("Do you want to double down?");
+            if (double) {
+                currentBet = currentBet * 2;
+                hitPlayer();
+            }
         });
 
         $("#hitdealer").on("click", function hitDealer() {
@@ -141,12 +153,17 @@ $(document).ready(function() {
             }
             while (dealerSum < 17);
 
+            finish();
+
 
 
         });
         console.log(cardArray[0].value);
 
-        $("#finish").on("click", function outcome() {
+
+        $("#finish").on("click", finish);
+
+        function finish() {
 
             if (playerSum > dealerSum && playerSum < 22) {
 
@@ -162,13 +179,32 @@ $(document).ready(function() {
                 alert("push");
                 $("#currentBet").html(0);
             }
-            if (playerSum < dealerSum) {
+            if (playerSum < dealerSum && dealerSum < 22) {
                 alert("you lose");
                 chipCount -= currentBet;
                 $("#chipCount").html(chipCount);
                 $("#currentBet").html(0);
             }
-        })
+
+            if(dealerSum > 21)
+            {
+                 alert("You win");
+                chipCount += currentBet;
+                $("#chipCount").html(chipCount);
+                $("#currentBet").html(0);
+            }
+        };
+
+        $("#reload").on("click", function() {
+            $("#playerHand").html("");
+            $("#playerSum").html("");
+            $("#dealerHand").html("");
+            $("#dealerSum").html("");
+            playerSum = "";
+            dealerSum = "";
+            currentBet = 0;
+
+        });
 
     }
 
@@ -218,5 +254,16 @@ $(document).ready(function() {
             $("#card").append(cardArray[w].image);
         }
     }
+
+    //    function audio() {
+    //     $("#moneysound")[0].play()
+    // }
+    // audio();
+
+
+    // function resetaudio() {
+    //     $("#moneysound")[0].pause();
+    //     $("#moneysound")[0].currentTime = 0;
+    // }
 
 });
