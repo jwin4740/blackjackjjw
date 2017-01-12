@@ -105,7 +105,7 @@ $(document).ready(function() {
 
         });
 
-function hitPlayer() {
+        function hitPlayer() {
 
             var res3 = getRandom(cardArray.length);
             console.log(cardArray[res3]);
@@ -114,18 +114,18 @@ function hitPlayer() {
             cardArray.splice(cardArray[res3], 1);
             console.log("deck now has: " + cardArray.length);
             $("#playerSum").html(playerSum);
-
-        
-            
+            if (playerSum > 21) {
+                finish();
+            }
         }
 
 
-       
-        
-        $("#hitplayer").on("click", hitPlayer); 
 
 
-        
+        $("#hitplayer").on("click", hitPlayer);
+
+
+
 
 
 
@@ -165,6 +165,13 @@ function hitPlayer() {
 
         function finish() {
 
+            if (playerSum > 21) {
+                alert("you lose");
+                chipCount -= currentBet;
+                $("#chipCount").html(chipCount);
+                $("#currentBet").html(0);
+            }
+
             if (playerSum > dealerSum && playerSum < 22) {
 
 
@@ -186,9 +193,8 @@ function hitPlayer() {
                 $("#currentBet").html(0);
             }
 
-            if(dealerSum > 21)
-            {
-                 alert("You win");
+            if (dealerSum > 21) {
+                alert("You win");
                 chipCount += currentBet;
                 $("#chipCount").html(chipCount);
                 $("#currentBet").html(0);
